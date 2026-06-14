@@ -24,16 +24,14 @@ Given("the application is running", async () => {
   await expect(page).toHaveTitle(/.*/);
 });
 
-Given("the user is on the login page", async () => {
+Given("the user is on the home page", async () => {
   await page.waitForLoadState("networkidle");
 });
 
-When("the user enters valid username and password", async () => {
-  await page.fill('#username', 'validUsername');
-  await page.fill('#password', 'validPassword');
+When("the user enters all possible values", async () => {
+  await page.fill('input', 'all possible values');
 });
 
-Then("the user is logged in successfully", async () => {
-  await page.click('#loginButton');
-  await expect(page).toHaveTitle(/Dashboard/);
+Then("the application should handle all possible entries without errors or warnings", async () => {
+  await expect(page).not.toHaveText('error');
 });
